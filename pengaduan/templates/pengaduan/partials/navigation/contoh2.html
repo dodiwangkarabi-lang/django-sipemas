@@ -1,0 +1,30 @@
+<div x-data="{ activeTab: 'profile' }">
+
+    <div class="flex gap-2 border-b">
+        <template x-for="tab in ['profile', 'password', 'setting']">
+            <button
+                @click="activeTab = tab"
+                class="px-4 py-2 capitalize"
+                :class="activeTab === tab
+                    ? 'border-b-2 border-blue-500 text-blue-600 font-semibold'
+                    : 'text-gray-500'">
+                <span x-text="tab"></span>
+            </button>
+        </template>
+    </div>
+
+    <div class="mt-4">
+        <div x-show="activeTab === 'profile'">
+            Konten Profil
+        </div>
+
+        <div x-show="activeTab === 'password'">
+            Konten Password
+        </div>
+
+        <div x-show="activeTab === 'setting'">
+            Konten Pengaturan
+        </div>
+    </div>
+
+</div>

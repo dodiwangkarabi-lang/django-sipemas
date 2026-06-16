@@ -5,14 +5,19 @@
 <div class="p-6">
 
 
-<!-- tabel pengaduan -->
- {% include "pengaduan/partials/tables/pengaduan.html" %}
-
-
 <!-- form pengaduan -->
  {% if roles.masyarakat %}
-    {% include "pengaduan/partials/forms/pengaduan.html" %}
+   {% include "pengaduan/partials/navigation/pengajuan_riwayat.html" %}
+
+   {% else %}
+    
+
+   <!-- tabel pengaduan -->
+ {% include "pengaduan/partials/tables/pengaduan.html" %}
+ 
  {% endif %}
+
+ 
  
 </div>
  
