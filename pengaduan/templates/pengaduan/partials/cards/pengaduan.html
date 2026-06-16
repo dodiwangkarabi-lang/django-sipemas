@@ -1,0 +1,166 @@
+<div class="mb-6">
+    <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+
+        <!-- Header -->
+        <div class="px-6 py-5 border-b border-gray-200">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+
+                <div>
+                    <h1 class="text-2xl font-bold text-gray-900">
+                        {{ pengaduan.judul }}
+                    </h1>
+
+                    <p class="text-sm text-gray-500 mt-1">
+                        {{ pengaduan.tanggal_pengaduan|date:"d F Y H:i" }}
+                    </p>
+                </div>
+
+                
+
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="p-6 space-y-6">
+
+            <!-- Informasi -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                <div>
+                    <p class="text-sm text-gray-500">
+                        Pelapor
+                    </p>
+                    <p class="font-medium text-gray-900">
+                        {{ pengaduan.masyarakat }}
+                    </p>
+                </div>
+
+                <div>
+                    <p class="text-sm text-gray-500">
+                        Kategori
+                    </p>
+                    <p class="font-medium text-gray-900">
+                        {{ pengaduan.get_kategori_display }}
+                    </p>
+                </div>
+
+                <div>
+                    <p class="text-sm text-gray-500">
+                        Status
+                    </p>
+                    <p class="font-medium text-gray-900">
+                        {{ pengaduan.get_status_display }}
+                    </p>
+                </div>
+
+                <div>
+                    <p class="text-sm text-gray-500">
+                        Hasil Klasifikasi
+                    </p>
+                    <p class="font-medium text-gray-900">
+                        {{ pengaduan.hasil_klasifikasi|default:"-" }}
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- Isi Laporan -->
+            <div>
+                <h2 class="text-lg font-semibold text-gray-900 mb-2">
+                    Isi Laporan
+                </h2>
+
+                <div class="bg-gray-50 rounded-lg p-4 text-gray-700 whitespace-pre-line">
+                    {{ pengaduan.isi_laporan }}
+                </div>
+            </div>
+
+            <!-- Foto Bukti -->
+            {% if pengaduan.foto_bukti %}
+            <div>
+                <h2 class="text-lg font-semibold text-gray-900 mb-2">
+                    Foto Bukti
+                </h2>
+
+                <img
+                    src="{{ pengaduan.foto_bukti.url }}"
+                    alt="Foto Bukti"
+                    class="rounded-lg border border-gray-200 max-h-[500px]"
+                >
+            </div>
+            {% endif %}
+
+            <!-- Riwayat Status -->
+            <div>
+                <h2 class="text-lg font-semibold text-gray-900 mb-4">
+                    Riwayat Status
+                </h2>
+
+                {% if pengaduan.riwayat_status.all %}
+                <div class="space-y-4">
+
+                    {% for item in pengaduan.riwayat_status.all %}
+                    <div class="flex gap-4">
+
+                        <div class="flex flex-col items-center">
+                            <div class="w-3 h-3 rounded-full bg-blue-500"></div>
+
+                            {% if not forloop.last %}
+                            <div class="w-0.5 flex-1 bg-gray-300 mt-1"></div>
+                            {% endif %}
+                        </div>
+
+                        <div class="flex-1 bg-gray-50 border border-gray-200 rounded-lg p-4">
+
+                            <div class="flex justify-between items-center">
+                                <span class="font-medium text-gray-900">
+                                    {{ item.get_status_display }}
+                                </span>
+
+                                <span class="text-sm text-gray-500">
+                                    {{ item.tanggal_update|date:"d F Y H:i" }}
+                                </span>
+                            </div>
+
+                            {% if item.keterangan %}
+                            <p class="mt-2 text-gray-700">
+                                {{ item.keterangan }}
+                            </p>
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+                    {% endfor %}
+
+                </div>
+                {% else %}
+                <div class="bg-gray-50 border border-gray-200 rounded-lg p-4 text-gray-500">
+                    Belum ada riwayat status.
+                </div>
+                {% endif %}
+            </div>
+
+        <!-- Footer -->
+        {% if roles.admin %}
+        <div class="px-6 py-4 bg-gray-50 border-t border-gray-200 flex justify-end gap-2">
+
+            <a
+                href="{% url 'pengaduan:pengaduan_web:index' %}"
+                class="px-4 py-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-100"
+            >
+                Kembali
+            </a>
+
+            <a
+                href=""
+                class="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700"
+            >
+                Edit
+            </a>
+
+        </div>
+        {% endif %}
+
+    </div>
+</div>

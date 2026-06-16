@@ -1,0 +1,89 @@
+<div
+    class="bg-white p-6"
+>
+<!-- judul -->
+ <h2 class="font-bold">Verifikasi Pengaduan</h2>
+
+    <form 
+        action="{% url 'pengaduan:pengaduan_web:verifikasi_laporan' laporan.id %}"
+        method="post" class="space-y-6"
+    >
+        {% csrf_token %}
+
+        <!-- Status -->
+        <div>
+            <label
+                for="id_status"
+                class="block text-sm font-medium text-gray-700 mb-2"
+            >
+                Status
+            </label>
+
+            <select
+                name="status"
+                id="id_status"
+                class="w-full rounded-lg border border-gray-300 px-3 py-2 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+            >
+                {% for value, label in form.fields.status.choices %}
+                    <option
+                        value="{{ value }}"
+                        {% if form.status.value == value %}selected{% endif %}
+                    >
+                        {{ label }}
+                    </option>
+                {% endfor %}
+            </select>
+
+            {% if form.status.errors %}
+                <p class="mt-1 text-sm text-red-600">
+                    {{ form.status.errors.0 }}
+                </p>
+            {% endif %}
+        </div>
+
+        <!-- Keterangan -->
+        <div>
+            <label
+                for="id_keterangan"
+                class="block text-sm font-medium text-gray-700 mb-2"
+            >
+                Keterangan
+            </label>
+
+            <textarea
+                name="keterangan"
+                id="id_keterangan"
+                rows="4"
+                class="w-full rounded-lg border border-gray-300 px-3 py-2 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+                placeholder="Masukkan keterangan..."
+            >{{ form.keterangan.value|default:'' }}</textarea>
+
+            {% if form.keterangan.errors %}
+                <p class="mt-1 text-sm text-red-600">
+                    {{ form.keterangan.errors.0 }}
+                </p>
+            {% endif %}
+        </div>
+
+        <!-- pesan -->
+        {% include "core/components/alert/messages.html" %}
+
+        <!-- Tombol -->
+        <div class="flex justify-end gap-2">
+            <a
+                href="javascript:history.back()"
+                class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300"
+            >
+                Batal
+            </a>
+
+            <button
+                type="submit"
+                class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+            >
+                Simpan
+            </button>
+        </div>
+    </form>
+
+</div>

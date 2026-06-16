@@ -1,0 +1,60 @@
+{% extends "core/layouts/base.html" %}
+
+
+{% block content %}
+
+<!-- container partials -->
+<div 
+    x-data="accountDetailPage()"
+    @open-form-edit.window="isEditFormOpen = true"
+    @reload-halaman.window="reloadHalaman()"
+    @open-form-rubah-password="isRubahPasswordFormOpen = true"
+    class="flex flex-col gap-6 p-6"
+>
+    {% include 'accounts/partials/cards/account_card.html' %}
+    {# include 'accounts/partials/cards/edit_account_card.html' #}
+    {# include 'accounts/partials/cards/ubah_password_account_card.html' #}
+
+
+    {% include 'accounts/partials/forms/account.html' with masyarakat_form=masyarakat_form user_form=user_form %}
+    
+    {% url 'accounts:accounts_web:rubah_password' masyarakat_id=masyarakat.id as action_url %}
+    {% include 'accounts/partials/forms/rubah_password.html' with form=form action_url=action_url %}
+   
+</div>
+
+
+{% endblock %}
+
+{% block script %}
+    <script>
+        function accountDetailPage() {
+            return {
+                isRubahPasswordFormOpen: false,
+                isEditFormOpen: false,
+
+                get isCardOpen() {
+                    const hasil = this.isRubahPasswordFormOpen || this.isEditFormOpen;
+                    console.log(hasil);
+                    return !hasil;
+                },
+
+                reloadHalaman() {
+                    window.location.reload();
+                },
+
+                closeRubahPasswordForm() {
+
+                },
+                closeEditForm() {},
+                
+                toggleRubahPasswordForm() {
+                    this.isRubahPasswordFormOpen = !this.isRubahPasswordFormOpen;
+                },
+                toggleEditForm() {
+                    this.isEditFormOpen = !this.isEditFormOpen;
+                }
+            }
+        }
+    </script>
+{% endblock %}

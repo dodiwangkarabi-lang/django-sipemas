@@ -1,0 +1,13 @@
+{% extends "core/layouts/base.html" %}
+
+{% block content %}
+
+<!-- tabel pengaduan -->
+ {% include "pengaduan/partials/tables/pengaduan.html" with table=riwayat_pengaduan %}
+
+
+<!-- form pengaduan -->
+ {% include "pengaduan/partials/forms/pengaduan.html" with form=form %}
+ 
+
+{% endblock %}

@@ -1,0 +1,102 @@
+<div 
+    x-show="isCardOpen" x-cloak
+    class="bg-white rounded-xl shadow-sm border border-gray-200">
+
+    <!-- Header -->
+    <div class="p-6 border-b border-gray-100">
+        <h2 class="text-lg font-semibold text-gray-800">
+            Informasi Akun
+        </h2>
+        <p class="text-sm text-gray-500">
+            Detail informasi pengguna yang sedang login.
+        </p>
+    </div>
+
+    <!-- Content -->
+    <div class="p-6">
+
+        <div class="flex items-center gap-4 mb-6">
+            <div class="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center">
+                <span class="text-xl font-bold text-blue-600">
+                    DT
+                </span>
+            </div>
+
+            <div>
+                <h3 class="font-semibold text-gray-800">
+                    {{ masyarakat.nama }}
+                </h3>
+                <p class="text-sm text-gray-500">
+                    {{ user.email }}
+                </p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+            <div>
+                <p class="text-sm text-gray-500">Nama Lengkap</p>
+                <p class="font-medium text-gray-800">{{ masyarakat.nama }}</p>
+            </div>
+
+            <div>
+                <p class="text-sm text-gray-500">NIK</p>
+                <p class="font-medium text-gray-800">{{ masyarakat.nik }}</p>
+            </div>
+
+            
+
+           
+
+            <div>
+                <p class="text-sm text-gray-500">No Telepon </p>
+                <p class="font-medium text-gray-800">{{ masyarakat.no_hp }}</p>
+            </div>
+
+            <div>
+                <p class="text-sm text-gray-500">Alamat </p>
+                <p class="font-medium text-gray-800">{{ masyarakat.alamat }}</p>
+            </div>
+
+
+            <!-- <div>
+                <p class="text-sm text-gray-500">Status</p>
+                <span class="inline-flex px-2 py-1 rounded-full text-xs bg-green-100 text-green-700">
+                    Aktif
+                </span>
+            </div> -->
+
+            <div>
+                <p class="text-sm text-gray-500">Bergabung</p>
+                <p class="font-medium text-gray-800">
+                    {{ user.date_joined|date:"d F Y" }}
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Actions -->
+    <div class="px-6 py-4 border-t border-gray-100 bg-gray-50 flex flex-wrap gap-2">
+
+        <a href="#"
+            @click.prevent="$dispatch('open-form-edit')"
+           class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700">
+            Edit Profil
+        </a>
+
+        <a href="#"
+            @click.prevent="$dispatch('open-form-rubah-password')"
+           class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-100">
+            Ubah Password
+        </a>
+
+        <!-- <a href="#"
+           class="px-4 py-2 text-sm font-medium text-red-600 bg-white border border-red-200 rounded-lg hover:bg-red-50">
+            Logout
+        </a> -->
+
+    </div>
+
+</div>

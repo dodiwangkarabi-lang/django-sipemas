@@ -1,0 +1,99 @@
+{% load django_tables2 %}
+
+
+
+<div class="overflow-x-auto">
+    <table {{ table.attrs.as_html }} class="min-w-full border border-gray-200">
+        {% if table.show_header %}
+        <thead class="bg-gray-100">
+            <tr>
+                {% for column in table.columns %}
+                    <th class="px-4 py-2 text-left">
+                        {{ column.header|upper }}
+                    </th>
+                {% endfor %}
+            </tr>
+        </thead>
+        {% endif %}
+
+        <tbody>
+            {% for row in table.rows %}
+            <tr class="border-b">
+                {% for column, cell in row.items %}
+                <td class="px-4 py-2">
+                    {{ cell }}
+                </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% if table.page %}
+<nav class="flex items-center justify-between mt-4">
+
+    <div class="text-sm text-gray-600">
+        Menampilkan halaman {{ table.page.number }}
+        dari {{ table.paginator.num_pages }}
+    </div>
+
+    <ul class="inline-flex -space-x-px text-sm">
+
+        <!-- Previous -->
+        {% if table.page.has_previous %}
+            <li>
+                <a href="?page={{ table.page.previous_page_number }}"
+                   class="px-3 py-2 border rounded-l hover:bg-gray-100">
+                    Previous
+                </a>
+            </li>
+        {% else %}
+            <li>
+                <span class="px-3 py-2 border rounded-l text-gray-400 bg-gray-50">
+                    Previous
+                </span>
+            </li>
+        {% endif %}
+
+        <!-- Page Numbers -->
+        {% for page_num in table.paginator.page_range %}
+
+            {% if page_num == table.page.number %}
+                <li>
+                    <span
+                        class="px-3 py-2 border bg-blue-600 text-white font-medium">
+                        {{ page_num }}
+                    </span>
+                </li>
+            {% else %}
+                <li>
+                    <a href="?page={{ page_num }}"
+                       class="px-3 py-2 border hover:bg-gray-100">
+                        {{ page_num }}
+                    </a>
+                </li>
+            {% endif %}
+
+        {% endfor %}
+
+        <!-- Next -->
+        {% if table.page.has_next %}
+            <li>
+                <a href="?page={{ table.page.next_page_number }}"
+                   class="px-3 py-2 border rounded-r hover:bg-gray-100">
+                    Next
+                </a>
+            </li>
+        {% else %}
+            <li>
+                <span class="px-3 py-2 border rounded-r text-gray-400 bg-gray-50">
+                    Next
+                </span>
+            </li>
+        {% endif %}
+
+    </ul>
+
+</nav>
+{% endif %}

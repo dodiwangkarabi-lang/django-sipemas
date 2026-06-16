@@ -1,0 +1,122 @@
+<form method="post" enctype="multipart/form-data" class="space-y-6">
+    {% csrf_token %}
+
+    <!-- Judul -->
+    <div>
+        <label
+            for="id_judul"
+            class="block text-sm font-medium text-gray-700 mb-2"
+        >
+            Judul Pengaduan
+        </label>
+
+        <input
+            type="text"
+            name="judul"
+            id="id_judul"
+            value="{{ form.judul.value|default:'' }}"
+            class="w-full rounded-lg border border-gray-300 px-3 py-2 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+            placeholder="Masukkan judul pengaduan"
+        >
+
+        {% if form.judul.errors %}
+            <p class="mt-1 text-sm text-red-600">
+                {{ form.judul.errors.0 }}
+            </p>
+        {% endif %}
+    </div>
+
+    <!-- Kategori -->
+    <div>
+        <label
+            for="id_kategori"
+            class="block text-sm font-medium text-gray-700 mb-2"
+        >
+            Kategori
+        </label>
+
+        <select
+            name="kategori"
+            id="id_kategori"
+            class="w-full rounded-lg border border-gray-300 px-3 py-2 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+        >
+            <option value="">-- Pilih Kategori --</option>
+
+            {% for value, label in form.fields.kategori.choices %}
+                <option
+                    value="{{ value }}"
+                    {% if form.kategori.value == value %}selected{% endif %}
+                >
+                    {{ label }}
+                </option>
+            {% endfor %}
+        </select>
+
+        {% if form.kategori.errors %}
+            <p class="mt-1 text-sm text-red-600">
+                {{ form.kategori.errors.0 }}
+            </p>
+        {% endif %}
+    </div>
+
+    <!-- Isi Laporan -->
+    <div>
+        <label
+            for="id_isi_laporan"
+            class="block text-sm font-medium text-gray-700 mb-2"
+        >
+            Isi Laporan
+        </label>
+
+        <textarea
+            name="isi_laporan"
+            id="id_isi_laporan"
+            rows="6"
+            class="w-full rounded-lg border border-gray-300 px-3 py-2 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+            placeholder="Jelaskan pengaduan Anda..."
+        >{{ form.isi_laporan.value|default:'' }}</textarea>
+
+        {% if form.isi_laporan.errors %}
+            <p class="mt-1 text-sm text-red-600">
+                {{ form.isi_laporan.errors.0 }}
+            </p>
+        {% endif %}
+    </div>
+
+    <!-- Foto Bukti -->
+    <div>
+        <label
+            for="id_foto_bukti"
+            class="block text-sm font-medium text-gray-700 mb-2"
+        >
+            Foto Bukti
+        </label>
+
+        <input
+            type="file"
+            name="foto_bukti"
+            id="id_foto_bukti"
+            accept="image/*"
+            class="block w-full text-sm text-gray-700
+                   file:mr-4 file:rounded-lg file:border-0
+                   file:bg-blue-600 file:px-4 file:py-2
+                   file:text-white hover:file:bg-blue-700"
+        >
+
+        {% if form.foto_bukti.errors %}
+            <p class="mt-1 text-sm text-red-600">
+                {{ form.foto_bukti.errors.0 }}
+            </p>
+        {% endif %}
+    </div>
+
+    <!-- Tombol -->
+    <div class="flex justify-end gap-2">
+        <button
+            type="submit"
+            class="rounded-lg bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
+        >
+            Kirim Pengaduan
+        </button>
+    </div>
+</form>

@@ -1,0 +1,21 @@
+{% extends "core/layouts/base.html" %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block page_title %}
+Dashboard
+{% endblock %}
+
+{% block content %}
+
+<!-- container partials -->
+<div class="flex flex-col gap-6 p-6">
+    {% include "core/dashboard/partials/statistik-siswa-card.html" with statistik=statistik_siswa %}
+    {# include "core/dashboard/partials/ringkasan-prediksi-card.html" #}
+</div>
+
+
+
+{% endblock %}

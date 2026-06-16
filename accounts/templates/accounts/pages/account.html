@@ -1,0 +1,24 @@
+{% extends "core/layouts/base.html" %}
+
+
+{% block content %}
+
+<!-- container partials -->
+<div class="flex flex-col gap-6 p-6">
+
+    {# include "accounts/partials/Navigation/contoh.html" #}
+    {# include "accounts/partials/Navigation/contoh2.html" #}
+
+    {# include "accounts/partials/sections/menu.html" #}
+    {# include "accounts/partials/sections/targat.html" #}
+
+
+    {% include "accounts/partials/tables/account.html" with table=masyarakat_table %}
+
+    
+    
+</div>
+
+
+
+{% endblock %}

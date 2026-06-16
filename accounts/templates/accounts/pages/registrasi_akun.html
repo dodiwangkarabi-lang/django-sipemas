@@ -1,0 +1,156 @@
+{% extends "core/layouts/base_auth.html" %}
+
+{% block content %}
+<div class="min-h-screen flex items-center justify-center bg-gray-100 px-4 py-6">
+    <div class="w-full max-w-2xl bg-white rounded-xl shadow-lg p-8">
+        
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-800">
+                Registrasi Akun
+            </h1>
+            <p class="text-gray-500 mt-2">
+                Silakan lengkapi data berikut untuk membuat akun.
+            </p>
+        </div>
+
+        <!-- pesan -->
+            {% include "core/components/alert/messages.html" %}
+
+        <form
+            action="{% url 'accounts:registrasi_akun' %}"
+            method="post"
+            class="space-y-5"
+        >
+            {% csrf_token %}
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                
+                <div>
+                    <label for="nik" class="block text-sm font-medium text-gray-700 mb-1">
+                        NIK
+                    </label>
+                    <input
+                        type="text"
+                        name="nik"
+                        id="nik"
+                        placeholder="Masukkan NIK"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                    >
+                </div>
+
+                <div>
+                    <label for="nama" class="block text-sm font-medium text-gray-700 mb-1">
+                        Nama Lengkap
+                    </label>
+                    <input
+                        type="text"
+                        name="nama"
+                        id="nama"
+                        placeholder="Masukkan nama lengkap"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                    >
+                </div>
+
+                <div class="md:col-span-2">
+                    <label for="alamat" class="block text-sm font-medium text-gray-700 mb-1">
+                        Alamat
+                    </label>
+                    <textarea
+                        name="alamat"
+                        id="alamat"
+                        rows="3"
+                        placeholder="Masukkan alamat"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                    ></textarea>
+                </div>
+
+                <div>
+                    <label for="no_hp" class="block text-sm font-medium text-gray-700 mb-1">
+                        Nomor HP
+                    </label>
+                    <input
+                        type="text"
+                        name="no_hp"
+                        id="no_hp"
+                        placeholder="08xxxxxxxxxx"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                    >
+                </div>
+
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">
+                        Email
+                    </label>
+                    <input
+                        type="email"
+                        name="email"
+                        id="email"
+                        placeholder="contoh@email.com"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                    >
+                </div>
+
+                <!-- full -->
+                <div class="md:col-span-2">
+                    <label for="username" class="block text-sm font-medium text-gray-700 mb-1">
+                        Username
+                    </label>
+                    <input
+                        type="text"
+                        name="username"
+                        id="username"
+                        placeholder="Masukkan username"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                    >
+                </div>
+
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700 mb-1">
+                        Password
+                    </label>
+                    <input
+                        type="password"
+                        name="password1"
+                        id="password"
+                        placeholder="Masukkan password"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                    >
+                </div>
+
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700 mb-1">
+                        Ulangi Password
+                    </label>
+                    <input
+                        type="password"
+                        name="password2"
+                        id="password"
+                        placeholder="Masukkan password"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                    >
+                </div>
+
+            </div>
+
+            <button
+                type="submit"
+                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition duration-200"
+            >
+                Daftar
+            </button>
+
+            <div class="text-center">
+                <a
+                    href="{% url 'accounts:login' %}"
+                    class="text-blue-600 hover:text-blue-800 text-sm"
+                >
+                    Sudah memiliki akun? Login
+                </a>
+            </div>
+
+            
+
+        </form>
+    </div>
+</div>
+{% endblock %}

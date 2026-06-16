@@ -1,0 +1,17 @@
+{% extends "core/layouts/base.html" %}
+
+{% block content %}
+
+
+<div class="p-6">
+
+    <!-- card pengaduan -->
+    {% include "pengaduan/partials/cards/pengaduan.html" with form=form %}
+
+    
+    <!-- form pengaduan -->
+    {% include "pengaduan/partials/forms/verifikasi_laporan.html" with form=form laporan=pengaduan %}
+    
+</div>
+
+{% endblock %}

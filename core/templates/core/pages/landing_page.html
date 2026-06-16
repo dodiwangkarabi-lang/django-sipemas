@@ -1,0 +1,76 @@
+{% extends "core/layouts/base.html" %}
+
+{% block content %}
+<div class="p-6">
+
+
+<div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-8">
+    
+    <div class="flex items-center gap-4 mb-6">
+        <div class="w-16 h-16 flex items-center justify-center rounded-xl bg-blue-100">
+            <ion-icon
+                name="megaphone-outline"
+                class="text-4xl text-blue-600"
+            ></ion-icon>
+        </div>
+
+        <div>
+            <h1 class="text-3xl font-bold text-gray-800">
+                Dashboard Pengaduan Masyarakat {{ statistik }}
+            </h1>
+            <p class="text-gray-500">
+                Kantor Kelurahan Saragi
+            </p>
+        </div>
+    </div>
+
+    <div class="border-t border-gray-200 pt-6">
+        <h2 class="text-xl font-semibold text-gray-700 mb-3">
+            Sistem Klasifikasi dan Monitoring Status Laporan
+        </h2>
+
+        <p class="text-gray-600 leading-relaxed">
+            Sistem ini digunakan untuk mengelola, mengklasifikasikan, dan memantau
+            status laporan pengaduan masyarakat secara terintegrasi pada
+            Kantor Kelurahan Saragi. Melalui sistem ini, masyarakat dapat
+            menyampaikan pengaduan, sementara petugas dapat melakukan
+            verifikasi, tindak lanjut, serta monitoring perkembangan
+            laporan secara transparan dan terdokumentasi.
+        </p>
+    </div>
+
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 mt-6">
+
+    <div class="bg-white rounded-xl shadow-sm border p-6">
+        <h3 class="text-gray-500 text-sm">Total Pengaduan</h3>
+        <p class="text-3xl font-bold text-blue-600">
+            {{ total_pengaduan|default:0 }}
+        </p>
+    </div>
+
+    <div class="bg-white rounded-xl shadow-sm border p-6">
+        <h3 class="text-gray-500 text-sm">Menunggu Verifikasi</h3>
+        <p class="text-3xl font-bold text-yellow-500">
+            {{ total_menunggu|default:0 }}
+        </p>
+    </div>
+
+    <div class="bg-white rounded-xl shadow-sm border p-6">
+        <h3 class="text-gray-500 text-sm">Sedang Diproses</h3>
+        <p class="text-3xl font-bold text-indigo-600">
+            {{ total_diproses|default:0 }}
+        </p>
+    </div>
+
+    <div class="bg-white rounded-xl shadow-sm border p-6">
+        <h3 class="text-gray-500 text-sm">Selesai</h3>
+        <p class="text-3xl font-bold text-green-600">
+            {{ total_selesai|default:0 }}
+        </p>
+    </div>
+
+</div>
+</div>
+{% endblock %}
