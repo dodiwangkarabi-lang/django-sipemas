@@ -9,7 +9,8 @@ from pengaduan.usecases.lihat_statistik_pengaduan import LihatStatistikPengaduan
 
 @login_required(login_url='accounts:login')
 def landing_page(request):
-    statistik = LihatStatistikPengaduan().execute()
+    user = request.user
+    statistik = LihatStatistikPengaduan().execute(user)
     
     context = {
         **statistik

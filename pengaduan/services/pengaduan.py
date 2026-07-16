@@ -3,10 +3,27 @@ from pengaduan.models import (
     Pengaduan, StatusLaporan
 )
 
+from django.db.models import QuerySet
+
 
 class PengaduanService:
     def __init__(self):
         pass
+    
+    # def get_pengaduan_by_role(self, user) -> QuerySet:
+    #     qs = Pengaduan.objects.select_related(
+    #         "masyarakat"
+    #     )
+        
+    #     groups = set(user.groups.values_list("name", flat=True))
+
+    #     if "masyarakat" in groups:
+    #         return qs.filter(masyarakat=user.masyarakat)
+
+    #     if "petugas" in groups:
+    #         return qs
+
+    #     return qs.none()
     
     def statistik(self, daftar_pengaduan):
         """

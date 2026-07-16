@@ -9,6 +9,13 @@ from accounts.models import (
 
 #     def __str__(self):
 #         return f"{self.pk} {self.nama_status}"
+
+# class KategoriPengaduan(models.Model):
+#     nama_kategori = models.CharField(max_length=100)
+#     deskripsi = models.TextField(blank=True)
+
+#     def __str__(self):
+#         return self.nama_kategori
     
 class StatusLaporan(models.TextChoices):
     MENUNGGU = "MENUNGGU", "Menunggu"
@@ -24,12 +31,7 @@ class KategoriPengaduan(models.TextChoices):
     PERINGATAN = "PERINGATAN", "Peringatan"
     PERTANYAAN = "PERTANYAAN", "Pertanyaan"
 
-# class KategoriPengaduan(models.Model):
-#     nama_kategori = models.CharField(max_length=100)
-#     deskripsi = models.TextField(blank=True)
 
-#     def __str__(self):
-#         return self.nama_kategori
 
 class Pengaduan(models.Model):
     masyarakat = models.ForeignKey(
