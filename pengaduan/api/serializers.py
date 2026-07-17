@@ -2,7 +2,7 @@ from rest_framework import serializers
 
 # ----- models -----
 from pengaduan.models import (
-    Pengaduan, RiwayatStatus
+    Pengaduan, RiwayatStatus, StatusLaporan
 )
 
 
@@ -50,14 +50,22 @@ class RiwayatStatusResponseSerializer(serializers.Serializer):
     
 # ----- riwayat status -----
 class TimeLineSerializer(serializers.Serializer):
-    status = serializers.CharField()
-    keterangan = serializers.CharField()
+    status = serializers.CharField(required=False)
+    keterangan = serializers.CharField(required=False)
     pengaduan_id = serializers.IntegerField()
     petugas_id = serializers.IntegerField()
     
 class TimeLineRequestSerializer(serializers.Serializer):
     status = serializers.CharField()
-    keterangan = serializers.CharField(required=False)
+    keterangan = serializers.CharField(required=False, allow_null=True, allow_blank=True)
+    
+    # validasi
+    def validate_status(self, value):
+        # harus sesuai StatusLaporan
+        if value not in StatusLaporan.values:
+            raise serializers.ValidationError("nilai status tidak sesuai")
+        
+        return value
     
 class TimeLineResponseSerializer(serializers.Serializer):
     message = serializers.CharField()

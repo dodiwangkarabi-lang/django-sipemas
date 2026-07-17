@@ -57,22 +57,27 @@ class PengaduanUpdateStatusView(APIView):
         pengaduan = Pengaduan.objects.get(id=pengaduan_id)
         petugas = request.user.petugas
         
-        data = {
-            "pengaduan_id": pengaduan.id,
-            "petugas_id": petugas.id,
-            "status": request.data.get("status"),
-            "keterangan": request.data.get("keterangan")
-        }
+        # data = {
+        #     "pengaduan_id": pengaduan.id,
+        #     "petugas_id": petugas.id,
+        #     "status": request.data.get("status"),
+        #     "keterangan": request.data.get("keterangan")
+        # }
         
-        serializer = serializers.TimeLineSerializer(data=data)
+        serializer = serializers.TimeLineRequestSerializer(data=request.data)
         serializer_valid = serializer.is_valid()
         
         if serializer_valid:
             
             data_clened = serializer.validated_data
+            data = {
+                **data_clened,
+                "pengaduan_id": pengaduan.id,
+                "petugas_id": petugas.id
+            }
             
             # create riwayat status
-            obj = kelola_timeline.create_timeline(TimeLineDTO(**data_clened))
+            obj = kelola_timeline.create_timeline(TimeLineDTO(**data))
             
             return Response({
                 "message": "success",
